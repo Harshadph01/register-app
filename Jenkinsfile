@@ -51,17 +51,22 @@ pipeline {
 			}
 		}
 		stage("Build & Push Docker Image"){
-			steps {
-				script {
-					docker.withRegistry('',DOCKER_PASS) {
-						docker_image = docker.build "${IMAGE_NAME}"
-					}
-					docker.withRegistry('',DOCKER_PASS){
-						docker_image.push("${IMAGE_TAG}")
-						docker_image.push('latest')
-					}
-				}
-			}
+ 			 steps {
+  				  script {
+    					  def dockerUsername = env.DOCKER_USER
+    					  def dockerPassword = env.DOCKER_PASS
+      
+     					 // Login to Docker Hub
+      					sh "docker login -u $dockerUsername -p $dockerPassword"
+      
+     					 docker.withRegistry('https://hub.docker.com', '') {
+      						 docker_image = docker.build "${IMAGE_NAME}:${IMAGE_TAG}"
+       						 docker_image.push() // Push the tagged image
+       						 docker_image.push('latest') // Push the 'latest' tag
+     					 }
+   				 }
+ 			 }
 		}
+
 	}
 }
