@@ -50,22 +50,10 @@ pipeline {
 				}
 			}
 		}
-		stage("Build & Push Docker Image"){
+		stage('Build & Push Docker Image') {
  			 steps {
-  				  script {
-    					  def dockerUsername = env.DOCKER_USER
-    					  def dockerPassword = env.DOCKER_PASS
-      
-     					 // Login to Docker Hub
-      					sh "docker login -u $dockerUsername -p $dockerPassword"
-      
-     					 docker.withRegistry('https://hub.docker.com', '') {
-      						 docker_image = docker.build ("${IMAGE_NAME}:${IMAGE_TAG}")
-       						 docker_image.push() // Push the tagged image
-       						 docker_image.push('latest') // Push the 'latest' tag
-     					 }
-   				 }
- 			 }
+  				  sh './docker_push.sh' // Assuming the script is in the same directory
+ 				 }
 		}
 
 	}
