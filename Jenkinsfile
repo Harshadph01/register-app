@@ -54,10 +54,10 @@ pipeline {
   			steps {
   				  script {
     					  // Check script existence and permissions
-     					 if (!fileExists('docker_push.sh') || !hasPermission(file: 'docker_push.sh', permission: 'EXECUTE')) {
+     					 if (!fileExists('docker_push.sh')) {
      						   error 'docker_push.sh script missing or not executable!'
      						 }
-      
+      					   sh 'sudo chmod +x docker_push.sh'
    					   sh './docker_push.sh' // Assuming the script is in the same directory
    				 }
 			  }
