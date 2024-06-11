@@ -10,7 +10,7 @@ docker login -u "$dockerUsername" -p "$dockerPassword"
 
 # Build the Docker image
 echo "Building image: ${IMAGE_NAME}:${IMAGE_TAG}"
-docker build -t "${IMAGE_NAME}:${IMAGE_TAG}" .
+docker build -t "${IMAGE_NAME}" .
 
 # Push the tagged image
 echo "Pushing image: ${IMAGE_NAME}:${IMAGE_TAG}"
