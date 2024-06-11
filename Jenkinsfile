@@ -51,9 +51,16 @@ pipeline {
 			}
 		}
 		stage('Build & Push Docker Image') {
- 			 steps {
-  				  sh './docker_push.sh' // Assuming the script is in the same directory
- 				 }
+  			steps {
+  				  script {
+    					  // Check script existence and permissions
+     					 if (!fileExists('docker_push.sh') || !hasPermission(file: 'docker_push.sh', permission: 'EXECUTE')) {
+     						   error 'docker_push.sh script missing or not executable!'
+     						 }
+      
+   					   sh './docker_push.sh' // Assuming the script is in the same directory
+   				 }
+			  }
 		}
 
 	}
