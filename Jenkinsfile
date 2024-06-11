@@ -60,7 +60,7 @@ pipeline {
       					sh "docker login -u $dockerUsername -p $dockerPassword"
       
      					 docker.withRegistry('https://hub.docker.com', '') {
-      						 docker_image = docker.build "${IMAGE_NAME}:${IMAGE_TAG}"
+      						 docker_image = docker.build ("${IMAGE_NAME}:${IMAGE_TAG}")
        						 docker_image.push() // Push the tagged image
        						 docker_image.push('latest') // Push the 'latest' tag
      					 }
