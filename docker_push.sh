@@ -17,8 +17,8 @@ echo "Pushing image: ${IMAGE_NAME}:${IMAGE_TAG}"
 docker push "${IMAGE_NAME}:${IMAGE_TAG}"
 
 # Optionally push the 'latest' tag
-#if [[ ! -z "$PUSH_LATEST" ]]; then
+if [[ ! -z "$PUSH_LATEST" ]]; then
  echo "Pushing image: ${IMAGE_NAME}:latest"
  docker push "${IMAGE_NAME}:latest"
 
-#fi
+fi
