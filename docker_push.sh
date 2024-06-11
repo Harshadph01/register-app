@@ -16,9 +16,7 @@ docker build -t "${IMAGE_NAME}:${IMAGE_TAG}" .
 echo "Pushing image: ${IMAGE_NAME}:${IMAGE_TAG}"
 docker push "${IMAGE_NAME}:${IMAGE_TAG}"
 
+echo "Pushing image: ${IMAGE_NAME}:latest"
+docker push "${IMAGE_NAME}:latest"
 # Optionally push the 'latest' tag
-if [[ ! -z "$PUSH_LATEST" ]]; then
- echo "Pushing image: ${IMAGE_NAME}:latest"
- docker push "${IMAGE_NAME}:latest"
 
-fi
